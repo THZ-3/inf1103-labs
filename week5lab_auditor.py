@@ -1,6 +1,27 @@
 import json
 import os
 
+def load_inventory():
+    """Load inventory from inventory.json if it exists, otherwise return an empty inventory."""
+    if os.path.exists("inventory.json"):
+        try:
+            print("inventory.json found.")
+            with open("inventory.json", "r") as file:
+                inventory = json.load(file)
+                print("\nInventory loaded successfully.")
+                return inventory
+        except json.JSONDecodeError:
+            print("Error reading inventory.json. Initializing with empty inventory.")
+   
+    print("inventory.json not found. Initializing with empty inventory.")
+    return {}
+
+def save_inventory(inventory):
+    """Save the current inventory dictionary to inventory.json."""
+    with open("inventory.json", "w") as file:
+        json.dump(inventory, file, indent=4)
+    print("Inventory saved successfully to inventory.json.")
+
 def display_all(inventory):
     """Display all products in the inventory."""
     print("\nCurrent Inventory")
@@ -16,7 +37,7 @@ def add_product(inventory):
     """Add a new product to the inventory dictionary."""
     print("\nAdd New Product")
     product_id = input("Product ID: ").strip()
-    
+   
     if product_id in inventory:
         print("Error: Product ID already exists!")
         return
@@ -31,7 +52,7 @@ def add_product(inventory):
         if price < 0:
             print("Error: Price cannot be negative.")
             return
-            
+           
         stock = int(input("Stock Quantity: "))
         if stock < 0:
             print("Error: Stock quantity cannot be negative.")
@@ -51,13 +72,13 @@ def update_stock(inventory):
     """Update stock quantity for an existing product ID."""
     print("\nUpdate Stock")
     product_id = input("Enter Product ID: ").strip()
-    
+   
     if product_id in inventory:
         product = inventory[product_id]
         print("\nProduct Found:")
         print(f"Name: {product['name']}")
         print(f"Current Stock: {product['stock']}")
-        
+       
         try:
             new_stock = int(input("\nNew Stock Quantity: "))
             if new_stock < 0:
@@ -74,7 +95,7 @@ def search_product(inventory):
     """Search for a product by its ID and display its details."""
     print("\nSearch Product")
     product_id = input("Enter Product ID: ").strip()
-    
+   
     if product_id in inventory:
         product = inventory[product_id]
         print("\nProduct Found")
@@ -87,21 +108,6 @@ def search_product(inventory):
     else:
         print("Product not found.")
 
-def load_inventory():
-    """Load inventory from inventory.json if it exists, otherwise return an empty inventory."""
-    if os.path.exists("inventory.json"):
-        try:
-            print("inventory.json found.")
-            with open("inventory.json", "r") as file:
-                inventory = json.load(file)
-                print("\nInventory loaded successfully.")
-                return inventory
-        except json.JSONDecodeError:
-            print("Error reading inventory.json. Initializing with empty inventory.")
-    
-    print("inventory.json not found. Initializing with empty inventory.")
-    return {}
-
 def main():
     print("=" * 40)
     print("INVENTORY MANAGEMENT SYSTEM")
@@ -109,6 +115,7 @@ def main():
 
     inventory = load_inventory()
 
+    # Display menu once at the start
     print("\n----------- MENU -----------")
     print("1. Display All Products")
     print("2. Add Product")
@@ -131,11 +138,16 @@ def main():
             search_product(inventory)
         elif option == "5":
             print("\nSaving inventory...")
+            save_inventory(inventory)
         elif option == "6":
-            print("\nProgram terminated.")
+            print("\nSaving inventory before exit...")
+            save_inventory(inventory)
+            print("\nThank you for using Inventory Management System.")
+            print("Program terminated.")
             break
         else:
             print("Error: Invalid option. Please choose a number between 1 and 6.")
 
 if __name__ == "__main__":
-    main()
+    main() 
+
