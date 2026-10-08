@@ -1,3 +1,6 @@
+import json
+import os
+
 def display_all(inventory):
     """Display all products in the inventory."""
     print("\nCurrent Inventory")
@@ -84,13 +87,27 @@ def search_product(inventory):
     else:
         print("Product not found.")
 
+def load_inventory():
+    """Load inventory from inventory.json if it exists, otherwise return an empty inventory."""
+    if os.path.exists("inventory.json"):
+        try:
+            print("inventory.json found.")
+            with open("inventory.json", "r") as file:
+                inventory = json.load(file)
+                print("\nInventory loaded successfully.")
+                return inventory
+        except json.JSONDecodeError:
+            print("Error reading inventory.json. Initializing with empty inventory.")
+    
+    print("inventory.json not found. Initializing with empty inventory.")
+    return {}
+
 def main():
     print("=" * 40)
     print("INVENTORY MANAGEMENT SYSTEM")
     print("=" * 40)
 
-    # Initial dictionary structure
-    inventory = {}
+    inventory = load_inventory()
 
     print("\n----------- MENU -----------")
     print("1. Display All Products")
