@@ -3,18 +3,26 @@ import os
 
 def load_inventory():
     """Load inventory from inventory.json if it exists, otherwise return an empty inventory."""
-    if os.path.exists("inventory.json"):
+    if not os.path.exists("inventory.json"):
+        print("inventory.json not found. Initializing with empty inventory.")
+        return {}
+
+    try:
+        with open("inventory.json", "r") as file:
+            inventory = json.load(file)
+        if not isinstance(inventory, dict):
+            raise ValueError("inventory.json does not contain a dictionary")
+        print("\nInventory loaded successfully.")
+        return inventory
+    except (json.JSONDecodeError, ValueError, OSError):
+        print("Error reading inventory.json. Initializing with empty inventory.")
+        # Keep the unreadable file so a later save does not overwrite it
         try:
-            print("inventory.json found.")
-            with open("inventory.json", "r") as file:
-                inventory = json.load(file)
-                print("\nInventory loaded successfully.")
-                return inventory
-        except json.JSONDecodeError:
-            print("Error reading inventory.json. Initializing with empty inventory.")
-   
-    print("inventory.json not found. Initializing with empty inventory.")
-    return {}
+            os.replace("inventory.json", "inventory.json.bak")
+            print("The unreadable file was backed up to inventory.json.bak.")
+        except OSError:
+            print("Warning: could not back up inventory.json. Saving will overwrite it.")
+        return {}
 
 def save_inventory(inventory):
     """Save the current inventory dictionary to inventory.json."""
@@ -37,7 +45,10 @@ def add_product(inventory):
     """Add a new product to the inventory dictionary."""
     print("\nAdd New Product")
     product_id = input("Product ID: ").strip()
-   
+    if not product_id:
+        print("Error: Product ID cannot be empty!")
+        return
+
     if product_id in inventory:
         print("Error: Product ID already exists!")
         return
