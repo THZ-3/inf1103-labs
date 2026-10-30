@@ -19,3 +19,6 @@ class DigitalProduct(Product):
         """Print the common product information, then the download size."""
         super().display_information()
         print(f"    Download Size: {self.__download_size:.2f} MB")
+
+    def get_fulfilment_info(self):
+        return "This product is delivered digitally via download."
