@@ -1,5 +1,8 @@
-class Product:
-    """Represents and manages a single product in the inventory."""
+from abc import ABC, abstractmethod
+
+
+class Product(ABC):
+    """Abstract base class that represents and manages a single product in the inventory."""
 
     def __init__(self, product_id, name, price, stock):
         if not product_id:
@@ -39,6 +42,11 @@ class Product:
         """Print this product on a single line."""
         print(f"ID: {self.__product_id} | Name: {self.__name} | "
               f"Price: ${self.__price:.2f} | Stock: {self.__stock}")
+
+    @abstractmethod
+    def get_fulfilment_info(self):
+        """Return how this product reaches the customer. Every subclass must implement this."""
+        pass
 
     def to_dict(self):
         """Return the product's data as a dictionary (used when saving)."""
