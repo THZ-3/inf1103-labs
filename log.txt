@@ -1,3 +1,123 @@
+commit 50eb18823151ee2fc49d82978337e480482116e8
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Oct 30 22:09:04 2026 +0800
+
+    Lab 7: Inventory with physical and digital products
+
+commit 0e39b9474a861f7ac06de26c834b4622be048290
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Oct 30 21:52:08 2026 +0800
+
+    Lab 7: Dockerfile copies all Python files
+
+commit 23505ee2ca7fca341d0d882dc6b6ce59e160ad4e
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Oct 30 21:51:50 2026 +0800
+
+    Lab 7: Added .gitignore
+
+commit a537b1ee6878d310ee8dd93a74c2838b45239667
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Oct 30 21:51:24 2026 +0800
+
+    Lab 7: Added inventory and JSON persistence tests
+
+commit 675e0daf2bbd7cd5f85d25ff9c763a5e56bd422b
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Oct 30 21:50:02 2026 +0800
+
+    Lab 7: Added UML class diagram
+
+commit 1d061b4479dcfd09e41d5f0ec45038cddd608785
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Oct 30 21:48:07 2026 +0800
+
+    Lab 7: Load the correct product subclass from JSON
+
+commit cc769b5a233172c4f300ca5607b1adb4e6cbdfbd
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Oct 30 21:45:39 2026 +0800
+
+    Lab 7: DigitalProduct saves its type and download size
+
+commit a6f65a88ff9404b776fac83ca527ba6d71ead5bf
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Oct 30 21:44:33 2026 +0800
+
+    Lab 7: PhysicalProduct saves its type and weight
+
+commit 5b5b084e4e8e998a44cdd583d7b58e24f8274618
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Oct 30 21:10:36 2026 +0800
+
+    Lab 7: Menu supports adding physical and digital products
+
+commit 41b1af80a972ccfe4b0009a6e802ec7ed57b548b
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Oct 30 21:07:44 2026 +0800
+
+    Lab 7: Added shipping cost tests
+
+commit ead7092ff1410a10c0e77653d778c6dbe4ba0d23
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Oct 30 21:07:36 2026 +0800
+
+    Lab 7: PhysicalProduct implements CanBeShipped
+
+commit 963e4cff6d1cd236222b43567d3977b0e36119e4
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Oct 30 21:05:17 2026 +0800
+
+    Lab 7: Created CanBeShipped interface
+
+commit 504448b8a0aab2bc39fb7cf902973391a9b88d75
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Oct 30 17:04:11 2026 +0800
+
+    Lab 7: Added abstract class tests
+
+commit ed50acce1e987e1d7e077912755c86cef79a5505
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Oct 30 17:04:02 2026 +0800
+
+    Lab 7: Implemented get_fulfilment_info() in DigitalProduct
+
+commit 5b2d0009e2fff6f56b78133aa0094780052eea65
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Oct 30 17:03:46 2026 +0800
+
+    Lab 7: Implemented get_fulfilment_info() in PhysicalProduct
+
+commit 3eb11ee0bc6dc93cee57dad6e1089d43d0e2a530
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Oct 30 17:02:26 2026 +0800
+
+    Lab 7: Made Product an abstract class with get_fulfilment_info()
+
+commit 6336a2d62507e3808cbf724045148bb3bf20fb7c
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Oct 30 16:56:16 2026 +0800
+
+    Lab 7: Added test script for product subclasses
+
+commit fe60aa4f80030ddf3f8e4b3c8b4468d21e3af7ea
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Oct 30 16:55:56 2026 +0800
+
+    Lab 7: Created DigitalProduct class inheriting from Product
+
+commit e2e433058b51e4a60caa9d7bc25c2608a2acefac
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Oct 30 16:55:41 2026 +0800
+
+    Lab 7: Created PhysicalProduct class inheriting from Product
+
+commit 2538cc2982686273164d64b1fe225984415e3fe4
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Oct 30 00:35:45 2026 +0800
+
+    Lab 6: Add git log
+
 commit 469b439eb563ea79ce52d98d196ff9a5f3865613
 Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
 Date:   Fri Oct 30 00:35:00 2026 +0800
