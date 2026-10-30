@@ -1,3 +1,15 @@
+commit b02aa337026918cbde987c628858766931abfdb9
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Oct 30 22:11:56 2026 +0800
+
+    Lab 7: Added digital and physical products to inventory
+
+commit d4483f796d2e0d12ee30f25f2d36183f684ed819
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Oct 30 22:10:37 2026 +0800
+
+    Lab 7: Add git log
+
 commit 50eb18823151ee2fc49d82978337e480482116e8
 Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
 Date:   Fri Oct 30 22:09:04 2026 +0800
