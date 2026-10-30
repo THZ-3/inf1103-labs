@@ -1,5 +1,7 @@
+from can_be_shipped import CanBeShipped
+from digital_product import DigitalProduct
 from file_handler import load_inventory, save_inventory
-from product import Product
+from physical_product import PhysicalProduct
 
 
 def display_menu():
@@ -14,8 +16,15 @@ def display_menu():
 
 
 def add_product_menu(inventory):
-    """Ask the user for product details and add the new Product to the inventory."""
+    """Ask the user for a product type and its details, then add it to the inventory."""
     print("\nAdd New Product")
+    print("1. Physical Product")
+    print("2. Digital Product")
+    product_type = input("Product Type: ").strip()
+    if product_type not in ("1", "2"):
+        print("Error: Invalid product type. Please choose 1 or 2.")
+        return
+
     product_id = input("Product ID: ").strip()
     if not product_id:
         print("Error: Product ID cannot be empty!")
@@ -32,13 +41,20 @@ def add_product_menu(inventory):
     try:
         price = float(input("Price: "))
         stock = int(input("Stock Quantity: "))
+        if product_type == "1":
+            extra = float(input("Weight (kg): "))
+        else:
+            extra = float(input("Download Size (MB): "))
     except ValueError:
-        print("Error: Invalid input. Please enter numbers for price and stock.")
+        print("Error: Invalid input. Please enter numbers for price, stock and weight/size.")
         return
 
-    # Product checks its own data (empty name, negative price or stock)
+    # Each product class checks its own data (negative price, stock, weight or size)
     try:
-        product = Product(product_id, product_name, price, stock)
+        if product_type == "1":
+            product = PhysicalProduct(product_id, product_name, price, stock, extra)
+        else:
+            product = DigitalProduct(product_id, product_name, price, stock, extra)
     except ValueError as error:
         print(f"Error: {error}")
         return
@@ -86,6 +102,10 @@ def search_product_menu(inventory):
     print("\nProduct Found")
     print("-" * 48)
     product.display_information()
+    print(f"    Fulfilment: {product.get_fulfilment_info()}")
+    # Only products that implement the CanBeShipped interface have a shipping cost
+    if isinstance(product, CanBeShipped):
+        print(f"    Shipping Cost: ${product.calculate_shipping_cost():.2f}")
     print("-" * 48)
 
 
