@@ -1,10 +1,25 @@
 import json
 import os
 
+from digital_product import DigitalProduct
 from inventory import Inventory
-from product import Product
+from physical_product import PhysicalProduct
 
 FILENAME = "inventory.json"
+
+
+def create_product(product_id, details):
+    """Use the saved "type" to create the matching Product subclass."""
+    # Lab 6 files have no "type"; those products were all physical
+    product_type = details.get("type", "physical")
+
+    if product_type == "physical":
+        return PhysicalProduct(product_id, details["name"], details["price"],
+                               details["stock"], details.get("weight", 0.0))
+    if product_type == "digital":
+        return DigitalProduct(product_id, details["name"], details["price"],
+                              details["stock"], details["download_size"])
+    raise ValueError(f"Unknown product type: {product_type}")
 
 
 def load_inventory(filename=FILENAME):
@@ -21,16 +36,14 @@ def load_inventory(filename=FILENAME):
         if not isinstance(data, dict):
             raise ValueError(f"{filename} does not contain a dictionary")
 
-        # Same format as Week 5: {"P001": {"name": ..., "price": ..., "stock": ...}}
         for product_id, details in data.items():
-            product = Product(product_id, details["name"], details["price"], details["stock"])
-            inventory.add_product(product)
+            inventory.add_product(create_product(product_id, details))
 
         print("\nInventory loaded successfully.")
         return inventory
     except (json.JSONDecodeError, ValueError, KeyError, TypeError, OSError):
         print(f"Error reading {filename}. Initializing with empty inventory.")
-        # Keep the unreadable file so a later save does not overwrite it
+        
         try:
             os.replace(filename, filename + ".bak")
             print(f"The unreadable file was backed up to {filename}.bak.")
