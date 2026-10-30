@@ -2,16 +2,22 @@
     "P001": {
         "name": "Laptop",
         "price": 2000.0,
-        "stock": 50
+        "stock": 50,
+        "type": "physical",
+        "weight": 0.0
     },
     "P002": {
         "name": "Mouse",
         "price": 30.0,
-        "stock": 200
+        "stock": 200,
+        "type": "physical",
+        "weight": 0.0
     },
     "P003": {
         "name": "Phone",
         "price": 1800.0,
-        "stock": 150
+        "stock": 150,
+        "type": "physical",
+        "weight": 0.0
     }
 }
