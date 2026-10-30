@@ -9,7 +9,6 @@ class PhysicalProduct(Product, CanBeShipped):
     SHIPPING_RATE_PER_KG = 2.00
 
     def __init__(self, product_id, name, price, stock, weight):
-        # Reuse Product's constructor for the common attributes
         super().__init__(product_id, name, price, stock)
 
         if weight < 0:
@@ -26,6 +25,13 @@ class PhysicalProduct(Product, CanBeShipped):
 
     def get_fulfilment_info(self):
         return "This product requires physical shipping."
+
+    def to_dict(self):
+        """Return the common product data plus the type and weight (used when saving)."""
+        data = super().to_dict()
+        data["type"] = "physical"
+        data["weight"] = self.__weight
+        return data
 
     def calculate_shipping_cost(self):
         """Shipping = $5.00 base fee + $2.00 per kg."""
