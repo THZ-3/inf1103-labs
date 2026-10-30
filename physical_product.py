@@ -1,8 +1,12 @@
+from can_be_shipped import CanBeShipped
 from product import Product
 
 
-class PhysicalProduct(Product):
-    """A product that physically exists and has a weight."""
+class PhysicalProduct(Product, CanBeShipped):
+    """A product that physically exists, has a weight and can be shipped."""
+
+    BASE_SHIPPING_FEE = 5.00
+    SHIPPING_RATE_PER_KG = 2.00
 
     def __init__(self, product_id, name, price, stock, weight):
         # Reuse Product's constructor for the common attributes
@@ -22,3 +26,7 @@ class PhysicalProduct(Product):
 
     def get_fulfilment_info(self):
         return "This product requires physical shipping."
+
+    def calculate_shipping_cost(self):
+        """Shipping = $5.00 base fee + $2.00 per kg."""
+        return self.BASE_SHIPPING_FEE + self.SHIPPING_RATE_PER_KG * self.__weight
