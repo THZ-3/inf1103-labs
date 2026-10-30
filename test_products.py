@@ -1,3 +1,4 @@
+from can_be_shipped import CanBeShipped
 from digital_product import DigitalProduct
 from physical_product import PhysicalProduct
 from product import Product
@@ -26,3 +27,14 @@ try:
     generic = Product("X001", "Generic", 10.00, 1)
 except TypeError as error:
     print(f"TypeError: {error}")
+
+# Lab 7, Step 4: CanBeShipped interface
+print("\nShipping costs for physical products of different weights:")
+for item in [PhysicalProduct("P002", "Phone Case", 15.00, 50, 0.2),
+             guitar,
+             PhysicalProduct("P003", "Amplifier", 480.00, 3, 12.0)]:
+    print(f"{item.get_name()} ({item.get_weight():.2f} kg): ${item.calculate_shipping_cost():.2f}")
+
+print("\nWhich products can be shipped?")
+for item in [guitar, os_licence]:
+    print(f"{item.get_name()}: {isinstance(item, CanBeShipped)}")
