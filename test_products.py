@@ -1,9 +1,12 @@
+import os
+
 from can_be_shipped import CanBeShipped
 from digital_product import DigitalProduct
+from file_handler import load_inventory, save_inventory
+from inventory import Inventory
 from physical_product import PhysicalProduct
 from product import Product
 
-# Lab 7, Steps 1-2: inheritance and method overriding
 print("Physical product:")
 guitar = PhysicalProduct("P001", "Guitar", 350.00, 5, 3.5)
 guitar.display_information()
@@ -12,12 +15,10 @@ print("\nDigital product:")
 os_licence = DigitalProduct("D001", "Operating System", 199.99, 100, 4500)
 os_licence.display_information()
 
-# Inherited methods still work on the subclasses
 print("\nInherited update_stock() on PhysicalProduct:")
 guitar.update_stock(8)
 print(f"Guitar stock is now {guitar.get_stock()}")
 
-# Lab 7, Step 3: abstract class
 print("\nget_fulfilment_info() from each subclass:")
 print(f"Guitar: {guitar.get_fulfilment_info()}")
 print(f"Operating System: {os_licence.get_fulfilment_info()}")
@@ -28,7 +29,6 @@ try:
 except TypeError as error:
     print(f"TypeError: {error}")
 
-# Lab 7, Step 4: CanBeShipped interface
 print("\nShipping costs for physical products of different weights:")
 for item in [PhysicalProduct("P002", "Phone Case", 15.00, 50, 0.2),
              guitar,
@@ -38,3 +38,21 @@ for item in [PhysicalProduct("P002", "Phone Case", 15.00, 50, 0.2),
 print("\nWhich products can be shipped?")
 for item in [guitar, os_licence]:
     print(f"{item.get_name()}: {isinstance(item, CanBeShipped)}")
+
+print("\nInventory operations with both product types:")
+inventory = Inventory()
+inventory.add_product(guitar)
+inventory.add_product(os_licence)
+print(f"Adding a duplicate ID is rejected: {not inventory.add_product(guitar)}")
+print(f"Update stock through Inventory: {inventory.update_stock('D001', 75)}")
+print(f"Search finds D001: {inventory.search_product('D001').get_name()}")
+inventory.display_all()
+
+print("\nJSON save and reload keeps the product types:")
+test_file = "test_inventory.json"
+save_inventory(inventory, test_file)
+reloaded = load_inventory(test_file)
+for item in reloaded.get_products():
+    print(f"{item.get_product_id()}: {type(item).__name__}")
+reloaded.display_all()
+os.remove(test_file)
