@@ -78,4 +78,4 @@ classDiagram
 - `CanBeShipped` is an `<<interface>>` (an abstract base class with only an abstract method and no attributes). Only `PhysicalProduct` implements it; `DigitalProduct` does not.
 - `display_information()`, `get_fulfilment_info()` and `to_dict()` appear again in the subclasses because they **override** the parent versions.
 - `Inventory` only depends on `Product`, so it works with any subclass without changes.
-- File handling (`file_handler.py`) and the menu (`week8lab_oop_auditor.py`) are plain functions, not classes. `create_product()` in `file_handler.py` reads the saved `"type"` and creates the matching subclass.
+- File handling (`file_handler.py`) and the menu (`oop_auditor.py`) are plain functions, not classes. `create_product()` in `file_handler.py` reads the saved `"type"` and creates the matching subclass.
