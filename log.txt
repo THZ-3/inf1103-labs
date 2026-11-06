@@ -1,3 +1,15 @@
+commit 525eddab3f76749cbc99d1a31dc407a90b9f9e45
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Nov 6 21:33:13 2026 +0800
+
+    Lab 7: Rename main program to oop_auditor.py
+
+commit 3ad4cb9a9105d3f1e6251b8dba563e0b71bf11a6
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Oct 30 22:12:03 2026 +0800
+
+    Lab 7: Update git log
+
 commit b02aa337026918cbde987c628858766931abfdb9
 Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
 Date:   Fri Oct 30 22:11:56 2026 +0800
