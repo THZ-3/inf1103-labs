@@ -1,10 +1,11 @@
 from abc import ABC, abstractmethod
 
+from supplier import Supplier
+
 
 class Product(ABC):
-    """Abstract base class that represents and manages a single product in the inventory."""
-
-    def __init__(self, product_id, name, price, stock):
+    def __init__(self, product_id: str, name: str, price: float, stock: int,
+                 supplier: Supplier) -> None:
         if not product_id:
             raise ValueError("Product ID cannot be empty.")
         if not name:
@@ -18,6 +19,7 @@ class Product(ABC):
         self.__name = name
         self.__price = float(price)
         self.__stock = int(stock)
+        self.__supplier: Supplier = supplier
 
     def get_product_id(self):
         return self.__product_id
@@ -31,27 +33,34 @@ class Product(ABC):
     def get_stock(self):
         return self.__stock
 
+    def get_supplier(self) -> Supplier:
+        return self.__supplier
+
+    def get_supplier_id(self) -> str:
+        return self.__supplier.get_supplier_id()
+
+    def get_supplier_name(self) -> str:
+        return self.__supplier.get_name()
+
     def update_stock(self, quantity):
-        """Set a new stock quantity. Returns True if the update was accepted."""
         if quantity < 0:
             return False
         self.__stock = quantity
         return True
 
     def display_information(self):
-        """Print this product on a single line."""
         print(f"ID: {self.__product_id} | Name: {self.__name} | "
-              f"Price: ${self.__price:.2f} | Stock: {self.__stock}")
+              f"Price: ${self.__price:.2f} | Stock: {self.__stock} | "
+              f"Supplier: {self.__supplier.get_name()}")
 
     @abstractmethod
     def get_fulfilment_info(self):
-        """Return how this product reaches the customer. Every subclass must implement this."""
         pass
 
     def to_dict(self):
-        """Return the product's data as a dictionary (used when saving)."""
         return {
             "name": self.__name,
             "price": self.__price,
-            "stock": self.__stock
+            "stock": self.__stock,
+            "supplier": self.__supplier.to_dict()
         }
