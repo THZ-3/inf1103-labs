@@ -2,6 +2,7 @@ from can_be_shipped import CanBeShipped
 from digital_product import DigitalProduct
 from file_handler import load_inventory, save_inventory
 from physical_product import PhysicalProduct
+from supplier import Supplier
 
 
 def display_menu():
@@ -15,8 +16,35 @@ def display_menu():
     print("----------------------------")
 
 
+def find_supplier(inventory, supplier_id):
+    for product in inventory.get_products():
+        if product.get_supplier_id() == supplier_id:
+            return product.get_supplier()
+    return None
+
+
+def choose_supplier(inventory):
+    supplier_id = input("Supplier ID: ").strip()
+    if not supplier_id:
+        print("Error: Supplier ID cannot be empty!")
+        return None
+
+    supplier = find_supplier(inventory, supplier_id)
+    if supplier is not None:
+        print(f"Using existing supplier: {supplier.get_name()}")
+        return supplier
+
+    print("New supplier.")
+    supplier_name = input("Supplier Name: ").strip()
+    contact_email = input("Supplier Email: ").strip()
+    try:
+        return Supplier(supplier_id, supplier_name, contact_email)
+    except ValueError as error:
+        print(f"Error: {error}")
+        return None
+
+
 def add_product_menu(inventory):
-    """Ask the user for a product type and its details, then add it to the inventory."""
     print("\nAdd New Product")
     print("1. Physical Product")
     print("2. Digital Product")
@@ -49,12 +77,15 @@ def add_product_menu(inventory):
         print("Error: Invalid input. Please enter numbers for price, stock and weight/size.")
         return
 
-    # Each product class checks its own data (negative price, stock, weight or size)
+    supplier = choose_supplier(inventory)
+    if supplier is None:
+        return
+
     try:
         if product_type == "1":
-            product = PhysicalProduct(product_id, product_name, price, stock, extra)
+            product = PhysicalProduct(product_id, product_name, price, stock, supplier, extra)
         else:
-            product = DigitalProduct(product_id, product_name, price, stock, extra)
+            product = DigitalProduct(product_id, product_name, price, stock, supplier, extra)
     except ValueError as error:
         print(f"Error: {error}")
         return
@@ -64,7 +95,6 @@ def add_product_menu(inventory):
 
 
 def update_stock_menu(inventory):
-    """Ask the user for a product ID and new stock quantity."""
     print("\nUpdate Stock")
     product_id = input("Enter Product ID: ").strip()
 
@@ -90,7 +120,6 @@ def update_stock_menu(inventory):
 
 
 def search_product_menu(inventory):
-    """Ask the user for a product ID and display the matching product."""
     print("\nSearch Product")
     product_id = input("Enter Product ID: ").strip()
 
@@ -103,7 +132,7 @@ def search_product_menu(inventory):
     print("-" * 48)
     product.display_information()
     print(f"    Fulfilment: {product.get_fulfilment_info()}")
-    # Only products that implement the CanBeShipped interface have a shipping cost
+    print(f"    Supplier Email: {product.get_supplier().get_contact_email()}")
     if isinstance(product, CanBeShipped):
         print(f"    Shipping Cost: ${product.calculate_shipping_cost():.2f}")
     print("-" * 48)
