@@ -4,14 +4,15 @@ import os
 from digital_product import DigitalProduct
 from inventory import Inventory
 from physical_product import PhysicalProduct
+from product import Product
 from supplier import Supplier
 
-FILENAME = "inventory.json"
+FILENAME: str = "inventory.json"
 
-UNKNOWN_SUPPLIER_DATA = {"supplier_id": "S000", "name": "Unknown Supplier", "contact_email": ""}
+UNKNOWN_SUPPLIER_DATA: dict = {"supplier_id": "S000", "name": "Unknown Supplier", "contact_email": ""}
 
 
-def get_supplier(supplier_data, suppliers):
+def get_supplier(supplier_data: dict, suppliers: dict[str, Supplier]) -> Supplier:
     supplier_id = supplier_data["supplier_id"]
     if supplier_id not in suppliers:
         suppliers[supplier_id] = Supplier(supplier_id, supplier_data["name"],
@@ -19,7 +20,7 @@ def get_supplier(supplier_data, suppliers):
     return suppliers[supplier_id]
 
 
-def create_product(product_id, details, suppliers):
+def create_product(product_id: str, details: dict, suppliers: dict[str, Supplier]) -> Product:
     product_type = details.get("type", "physical")
     supplier = get_supplier(details.get("supplier", UNKNOWN_SUPPLIER_DATA), suppliers)
 
@@ -32,7 +33,7 @@ def create_product(product_id, details, suppliers):
     raise ValueError(f"Unknown product type: {product_type}")
 
 
-def load_inventory(filename=FILENAME):
+def load_inventory(filename: str = FILENAME) -> Inventory:
     inventory = Inventory()
 
     if not os.path.exists(filename):
@@ -45,7 +46,7 @@ def load_inventory(filename=FILENAME):
         if not isinstance(data, dict):
             raise ValueError(f"{filename} does not contain a dictionary")
 
-        suppliers = {}
+        suppliers: dict[str, Supplier] = {}
         for product_id, details in data.items():
             inventory.add_product(create_product(product_id, details, suppliers))
 
@@ -62,8 +63,8 @@ def load_inventory(filename=FILENAME):
         return Inventory()
 
 
-def save_inventory(inventory, filename=FILENAME):
-    data = {}
+def save_inventory(inventory: Inventory, filename: str = FILENAME) -> None:
+    data: dict = {}
     for product in inventory.get_products():
         data[product.get_product_id()] = product.to_dict()
 

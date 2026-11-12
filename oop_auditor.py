@@ -1,11 +1,12 @@
 from can_be_shipped import CanBeShipped
 from digital_product import DigitalProduct
 from file_handler import load_inventory, save_inventory
+from inventory import Inventory
 from physical_product import PhysicalProduct
 from supplier import Supplier
 
 
-def display_menu():
+def display_menu() -> None:
     print("\n----------- MENU -----------")
     print("1. Display All Products")
     print("2. Add Product")
@@ -16,14 +17,14 @@ def display_menu():
     print("----------------------------")
 
 
-def find_supplier(inventory, supplier_id):
+def find_supplier(inventory: Inventory, supplier_id: str) -> Supplier | None:
     for product in inventory.get_products():
         if product.get_supplier_id() == supplier_id:
             return product.get_supplier()
     return None
 
 
-def choose_supplier(inventory):
+def choose_supplier(inventory: Inventory) -> Supplier | None:
     supplier_id = input("Supplier ID: ").strip()
     if not supplier_id:
         print("Error: Supplier ID cannot be empty!")
@@ -44,7 +45,7 @@ def choose_supplier(inventory):
         return None
 
 
-def add_product_menu(inventory):
+def add_product_menu(inventory: Inventory) -> None:
     print("\nAdd New Product")
     print("1. Physical Product")
     print("2. Digital Product")
@@ -94,7 +95,7 @@ def add_product_menu(inventory):
     print("\nProduct added successfully!")
 
 
-def update_stock_menu(inventory):
+def update_stock_menu(inventory: Inventory) -> None:
     print("\nUpdate Stock")
     product_id = input("Enter Product ID: ").strip()
 
@@ -119,7 +120,7 @@ def update_stock_menu(inventory):
         print("Error: Stock cannot be negative.")
 
 
-def search_product_menu(inventory):
+def search_product_menu(inventory: Inventory) -> None:
     print("\nSearch Product")
     product_id = input("Enter Product ID: ").strip()
 
@@ -138,7 +139,7 @@ def search_product_menu(inventory):
     print("-" * 48)
 
 
-def main():
+def main() -> None:
     print("=" * 40)
     print("INVENTORY MANAGEMENT SYSTEM")
     print("=" * 40)
