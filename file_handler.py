@@ -4,26 +4,35 @@ import os
 from digital_product import DigitalProduct
 from inventory import Inventory
 from physical_product import PhysicalProduct
+from supplier import Supplier
 
 FILENAME = "inventory.json"
 
+UNKNOWN_SUPPLIER_DATA = {"supplier_id": "S000", "name": "Unknown Supplier", "contact_email": ""}
 
-def create_product(product_id, details):
-    """Use the saved "type" to create the matching Product subclass."""
-    # Lab 6 files have no "type"; those products were all physical
+
+def get_supplier(supplier_data, suppliers):
+    supplier_id = supplier_data["supplier_id"]
+    if supplier_id not in suppliers:
+        suppliers[supplier_id] = Supplier(supplier_id, supplier_data["name"],
+                                          supplier_data["contact_email"])
+    return suppliers[supplier_id]
+
+
+def create_product(product_id, details, suppliers):
     product_type = details.get("type", "physical")
+    supplier = get_supplier(details.get("supplier", UNKNOWN_SUPPLIER_DATA), suppliers)
 
     if product_type == "physical":
         return PhysicalProduct(product_id, details["name"], details["price"],
-                               details["stock"], details.get("weight", 0.0))
+                               details["stock"], supplier, details.get("weight", 0.0))
     if product_type == "digital":
         return DigitalProduct(product_id, details["name"], details["price"],
-                              details["stock"], details["download_size"])
+                              details["stock"], supplier, details["download_size"])
     raise ValueError(f"Unknown product type: {product_type}")
 
 
 def load_inventory(filename=FILENAME):
-    """Load an Inventory from a JSON file, or return an empty Inventory if it cannot be read."""
     inventory = Inventory()
 
     if not os.path.exists(filename):
@@ -36,8 +45,9 @@ def load_inventory(filename=FILENAME):
         if not isinstance(data, dict):
             raise ValueError(f"{filename} does not contain a dictionary")
 
+        suppliers = {}
         for product_id, details in data.items():
-            inventory.add_product(create_product(product_id, details))
+            inventory.add_product(create_product(product_id, details, suppliers))
 
         print("\nInventory loaded successfully.")
         return inventory
@@ -53,7 +63,6 @@ def load_inventory(filename=FILENAME):
 
 
 def save_inventory(inventory, filename=FILENAME):
-    """Save every product in the Inventory to a JSON file."""
     data = {}
     for product in inventory.get_products():
         data[product.get_product_id()] = product.to_dict()
