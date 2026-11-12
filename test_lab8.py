@@ -177,3 +177,59 @@ for product in store.get_products():
 print("\n3. The same show_product_details(product: Product) function from Section 6:")
 for product in store.get_products():
     show_product_details(product)
+
+print("\n=== Section 9: Testing checklist ===")
+
+results: list[bool] = []
+
+
+def check(description: str, passed: bool) -> None:
+    results.append(passed)
+    print(f"[{'PASS' if passed else 'FAIL'}] {description}")
+
+
+beat_co = Supplier("S002", "Beat Co", "beat@co.com")
+drum = PhysicalProduct("P010", "Drum", 500.00, 2, beat_co, 20)
+course = DigitalProduct("D010", "Drum Course", 49.00, 100, beat_co, 800)
+
+check("Supplier and Product are separate objects that exist independently",
+      drum.get_supplier() is beat_co and drum is not beat_co)
+check("Product stores a reference to its Supplier",
+      drum.get_supplier() is course.get_supplier() is beat_co)
+
+warehouse_1 = Inventory()
+warehouse_2 = Inventory()
+warehouse_1.add_product(drum)
+check("Inventory aggregates Product objects", warehouse_1.find_product("P010") is drum)
+moved = warehouse_1.remove_product("P010")
+warehouse_2.add_product(drum)
+check("A Product can move to another Inventory without being destroyed",
+      moved is drum and warehouse_1.find_product("P010") is None
+      and warehouse_2.find_product("P010") is drum and drum.get_name() == "Drum")
+
+order_a = Order("O010")
+order_b = Order("O011")
+order_a.add_order_line(drum, 2)
+order_a.add_order_line(course, 1)
+order_b.add_order_line(drum, 1)
+lines_a = order_a.get_order_lines()
+check("Order creates and manages its own OrderLine objects",
+      len(lines_a) == 2 and lines_a[0] is not order_b.get_order_lines()[0])
+check("OrderLine refers to a Product but does not own it",
+      lines_a[0].get_product() is drum and order_b.get_order_lines()[0].get_product() is drum)
+check("Order calculates its total from its OrderLines",
+      order_a.calculate_total() == sum(line.calculate_subtotal() for line in lines_a) == 1049.00)
+del lines_a
+
+warehouse_2.add_product(course)
+check("Inventory works with both product types through Product",
+      all(isinstance(product, Product) for product in warehouse_2.get_products())
+      and len(warehouse_2.get_products()) == 2)
+check("Both subclasses keep update_stock() behaviour",
+      all(product.update_stock(5) and not product.update_stock(-1) and product.get_stock() == 5
+          for product in [drum, course]))
+check("Polymorphic calls run the correct subclass implementation",
+      [product.get_fulfilment_info() for product in warehouse_2.get_products()]
+      == ["This product requires physical shipping.", "This product is delivered digitally via download."])
+
+print(f"\n{sum(results)} of {len(results)} checks passed.")
