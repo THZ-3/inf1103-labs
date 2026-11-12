@@ -1,5 +1,6 @@
 from digital_product import DigitalProduct
 from inventory import Inventory
+from order import Order
 from physical_product import PhysicalProduct
 from supplier import Supplier
 
@@ -65,3 +66,44 @@ for product in [amp, guitar, ebook]:
     product.display_information()
 
 print(f"\nRemoving a product that is not there returns: {inventory_b.remove_product('X999')}")
+
+print("\n=== Section 4: Composition (Order and OrderLine) ===")
+
+print("\n1. Create an Order and add two products with add_order_line():")
+order_1 = Order("O001")
+order_1.add_order_line(guitar, 2)
+order_1.add_order_line(ebook, 3)
+
+print("\n2. Display each order line and the order total:")
+order_1.display_information()
+
+print("\n3. Predict first: add the same Product to a different Order:")
+order_2 = Order("O002")
+order_2.add_order_line(guitar, 1)
+order_2.display_information()
+
+line_1 = order_1.get_order_lines()[0]
+line_2 = order_2.get_order_lines()[0]
+print(f"\nThe two orders have different OrderLine objects: {line_1 is not line_2}")
+print(f"id(line_1) = {id(line_1)}, id(line_2) = {id(line_2)}")
+print(f"Both OrderLines refer to the same Product object: {line_1.get_product() is line_2.get_product() is guitar}")
+print(f"id(line_1 product) = {id(line_1.get_product())}, id(line_2 product) = {id(line_2.get_product())}")
+print("So: 2 OrderLine objects, but only 1 Product object.")
+del line_1, line_2
+
+print("\n4. Remove an order line through the Order:")
+print(f"remove_order_line('D001') returned: {order_1.remove_order_line('D001')}")
+order_1.display_information()
+print("The eBook Product still exists:")
+ebook.display_information()
+
+print("\n5. Remove Order O002 from the scenario:")
+del order_2
+print("Order O002 and its OrderLine are gone, but the Guitar Product is not:")
+guitar.display_information()
+
+print("\n6. An OrderLine cannot be added with an invalid quantity:")
+try:
+    order_1.add_order_line(guitar, 0)
+except ValueError as error:
+    print(f"ValueError: {error}")
