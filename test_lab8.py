@@ -2,6 +2,7 @@ from digital_product import DigitalProduct
 from inventory import Inventory
 from order import Order
 from physical_product import PhysicalProduct
+from product import Product
 from supplier import Supplier
 
 print("=== Section 2: Association (Supplier and Product) ===")
@@ -107,3 +108,54 @@ try:
     order_1.add_order_line(guitar, 0)
 except ValueError as error:
     print(f"ValueError: {error}")
+
+print("\n=== Section 6: Liskov Substitution Principle ===")
+
+
+def show_product_details(product: Product) -> None:
+    product.display_information()
+    print(product.get_fulfilment_info())
+
+
+print("\n1. The same function works with a PhysicalProduct and a DigitalProduct:")
+show_product_details(guitar)
+show_product_details(ebook)
+
+print("\n2. Both product types work with the normal Inventory operations:")
+shop = Inventory()
+print(f"add_product(guitar): {shop.add_product(guitar)}")
+print(f"add_product(ebook): {shop.add_product(ebook)}")
+print(f"find_product('D001') is ebook: {shop.find_product('D001') is ebook}")
+print(f"update_stock('P001', 6): {shop.update_stock('P001', 6)}")
+print(f"update_stock('D001', 90): {shop.update_stock('D001', 90)}")
+shop.display_all()
+print(f"remove_product('P001') is guitar: {shop.remove_product('P001') is guitar}")
+shop.display_all()
+
+print("\n3. Both subclasses keep Product's update_stock() expectation:")
+print("   accepts any quantity >= 0 and returns True, rejects a negative and returns False")
+for product in [guitar, ebook]:
+    before = product.get_stock()
+    accepted = product.update_stock(0)
+    zero_stock = product.get_stock()
+    product.update_stock(before)
+    rejected = product.update_stock(-5)
+    print(f"{type(product).__name__}: update_stock(0) -> {accepted} (stock {zero_stock}), "
+          f"update_stock(-5) -> {rejected} (stock still {product.get_stock()})")
+
+
+print("\n4. Diagnose: a DigitalProduct that refuses update_stock() breaks Inventory:")
+
+
+class NoStockDigitalProduct(DigitalProduct):
+    def update_stock(self, quantity: int) -> bool:
+        raise NotImplementedError("Digital products have no stock")
+
+
+licence = NoStockDigitalProduct("D002", "Software Licence", 50.00, 10, guitar.get_supplier(), 300)
+shop.add_product(licence)
+try:
+    shop.update_stock("D002", 20)
+except NotImplementedError as error:
+    print(f"Inventory.update_stock() crashed: NotImplementedError: {error}")
+print("Inventory only knows it has a Product, so this subclass cannot safely replace Product.")
