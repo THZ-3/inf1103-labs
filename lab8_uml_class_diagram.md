@@ -2,6 +2,10 @@
 
 `-` = private, `+` = public, `*` = abstract method. Types are language-independent: `String`, `float`, `int`, `bool`, `void`; a collection is written as `Type [0..*]`.
 
+![Lab 8 UML class diagram](lab8_uml_class_diagram.png)
+
+Mermaid source (renders on GitHub):
+
 ```mermaid
 classDiagram
     class Supplier {
