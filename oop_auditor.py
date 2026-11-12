@@ -57,7 +57,7 @@ def add_product_menu(inventory):
     if not product_id:
         print("Error: Product ID cannot be empty!")
         return
-    if inventory.search_product(product_id) is not None:
+    if inventory.find_product(product_id) is not None:
         print("Error: Product ID already exists!")
         return
 
@@ -98,7 +98,7 @@ def update_stock_menu(inventory):
     print("\nUpdate Stock")
     product_id = input("Enter Product ID: ").strip()
 
-    product = inventory.search_product(product_id)
+    product = inventory.find_product(product_id)
     if product is None:
         print("Product not found.")
         return
@@ -123,7 +123,7 @@ def search_product_menu(inventory):
     print("\nSearch Product")
     product_id = input("Enter Product ID: ").strip()
 
-    product = inventory.search_product(product_id)
+    product = inventory.find_product(product_id)
     if product is None:
         print("Product not found.")
         return

@@ -48,7 +48,7 @@ inventory.add_product(guitar)
 inventory.add_product(os_licence)
 print(f"Adding a duplicate ID is rejected: {not inventory.add_product(guitar)}")
 print(f"Update stock through Inventory: {inventory.update_stock('D001', 75)}")
-print(f"Search finds D001: {inventory.search_product('D001').get_name()}")
+print(f"Search finds D001: {inventory.find_product('D001').get_name()}")
 inventory.display_all()
 
 print("\nJSON save and reload keeps the product types:")
