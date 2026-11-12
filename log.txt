@@ -1,3 +1,117 @@
+commit 2570e6d3eb66e246b01e21e46a256ed3050c45bc
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Nov 13 01:47:41 2026 +0800
+
+    Lab 8: Added Section 9 testing checklist
+
+commit 09c25ad8cf6a65071ac9048425ad948abff3ba52
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Nov 13 01:02:58 2026 +0800
+
+    Lab 8: Added UML class diagram image
+
+commit 542fa1c30107a800fe4e888c6b9918eca8c7e030
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Nov 13 00:34:40 2026 +0800
+
+    Lab 8: Added polymorphism test
+
+commit e473900f5d99d431cca1137f8081fc36bbaa4f0b
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Nov 13 00:18:36 2026 +0800
+
+    Lab 8: Added Liskov Substitution Principle tests
+
+commit 9a168e161869919eb4f110501224138c8490045b
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Thu Nov 12 23:58:24 2026 +0800
+
+    Lab 8: Added UML class diagram with types and relationships
+
+commit c14f4338e4a50e65fce48bf4d87369386da076a5
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Thu Nov 12 23:52:45 2026 +0800
+
+    Lab 8: Type hints on file handler and menu
+
+commit 587f379b2c6384b12914112ce0485aa8f3b1b944
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Thu Nov 12 23:50:46 2026 +0800
+
+    Lab 8: Type hints on product classes and CanBeShipped
+
+commit 40bdb4b47a4739534b0e271353904d7c68e94f66
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Thu Nov 12 23:47:01 2026 +0800
+
+    Lab 8: Added composition tests
+
+commit dd2579a1f8829f15917ab933ced0fb2afcc4e146
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Thu Nov 12 23:46:13 2026 +0800
+
+    Lab 8: Created Order and OrderLine with composition
+
+commit e0eec9f59defddc1e49ddfec191a673334c282ec
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Thu Nov 12 23:43:19 2026 +0800
+
+    Lab 8: Added aggregation tests
+
+commit f8971435bd69c29521ad2ae17251d97cec0085b4
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Thu Nov 12 23:42:48 2026 +0800
+
+    Lab 8: Use find_product instead of search_product
+
+commit 9f7ae8be5303013d6732b8baa7cdd291e38137f5
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Thu Nov 12 23:41:57 2026 +0800
+
+    Lab 8: Inventory aggregation with find_product and remove_product
+
+commit 74129a8cefabd67c1589530434deeb9f253ee1be
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Thu Nov 12 23:28:33 2026 +0800
+
+    Lab 8: Added association tests
+
+commit 68edfb2311392faa32e8cbfe4d28148f243c8494
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Thu Nov 12 23:28:24 2026 +0800
+
+    Lab 8: Ask for a supplier when adding a product
+
+commit 8f42198e086f367164d509c788550d07b463d14c
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Thu Nov 12 23:28:14 2026 +0800
+
+    Lab 8: Save and load suppliers with products
+
+commit 62bcd0cdbda4f3b77c97ea2bcde0210e01285063
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Thu Nov 12 23:27:54 2026 +0800
+
+    Lab 8: Pass Supplier through PhysicalProduct and DigitalProduct
+
+commit bff83f1b1a47a3873f90055c7b0601b4208102a9
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Thu Nov 12 23:27:44 2026 +0800
+
+    Lab 8: Associate Product with a Supplier
+
+commit 7cb5c162df3003ae7557923e89b79fd7864a2883
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Thu Nov 12 23:27:36 2026 +0800
+
+    Lab 8: Created Supplier class
+
+commit 9dfeed46113ba8358e36d5e7d48526c46a5ed906
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Nov 6 21:33:17 2026 +0800
+
+    Lab 7: Update git log
+
 commit 525eddab3f76749cbc99d1a31dc407a90b9f9e45
 Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
 Date:   Fri Nov 6 21:33:13 2026 +0800
