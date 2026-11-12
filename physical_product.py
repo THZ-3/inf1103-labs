@@ -4,8 +4,8 @@ from supplier import Supplier
 
 
 class PhysicalProduct(Product, CanBeShipped):
-    BASE_SHIPPING_FEE = 5.00
-    SHIPPING_RATE_PER_KG = 2.00
+    BASE_SHIPPING_FEE: float = 5.00
+    SHIPPING_RATE_PER_KG: float = 2.00
 
     def __init__(self, product_id: str, name: str, price: float, stock: int,
                  supplier: Supplier, weight: float) -> None:
@@ -13,23 +13,23 @@ class PhysicalProduct(Product, CanBeShipped):
 
         if weight < 0:
             raise ValueError("Weight cannot be negative.")
-        self.__weight = float(weight)
+        self.__weight: float = float(weight)
 
-    def get_weight(self):
+    def get_weight(self) -> float:
         return self.__weight
 
-    def display_information(self):
+    def display_information(self) -> None:
         super().display_information()
         print(f"    Weight: {self.__weight:.2f} kg")
 
-    def get_fulfilment_info(self):
+    def get_fulfilment_info(self) -> str:
         return "This product requires physical shipping."
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
         data = super().to_dict()
         data["type"] = "physical"
         data["weight"] = self.__weight
         return data
 
-    def calculate_shipping_cost(self):
+    def calculate_shipping_cost(self) -> float:
         return self.BASE_SHIPPING_FEE + self.SHIPPING_RATE_PER_KG * self.__weight
