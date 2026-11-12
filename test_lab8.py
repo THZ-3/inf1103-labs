@@ -159,3 +159,21 @@ try:
 except NotImplementedError as error:
     print(f"Inventory.update_stock() crashed: NotImplementedError: {error}")
 print("Inventory only knows it has a Product, so this subclass cannot safely replace Product.")
+
+print("\n=== Section 7: Polymorphism ===")
+
+print("\n1. Add physical and digital products to the same Inventory:")
+store = Inventory()
+store.add_product(guitar)
+store.add_product(ebook)
+store.add_product(amp)
+print(f"Products in the store: {[product.get_name() for product in store.get_products()]}")
+
+print("\n2. Predict first: one loop, no isinstance(), same method calls on every Product:")
+for product in store.get_products():
+    product.display_information()
+    print(f"    Fulfilment: {product.get_fulfilment_info()}")
+
+print("\n3. The same show_product_details(product: Product) function from Section 6:")
+for product in store.get_products():
+    show_product_details(product)
