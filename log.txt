@@ -1,3 +1,21 @@
+commit 7c6df1d6540176bf4661dae991059038741bbb6b
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Nov 20 23:37:23 2026 +0800
+
+    Lab 8 and Lab 9: Predict-first answers
+
+commit 97fa6bbfc20f4296405b321a98a92f9b8d932c31
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Nov 20 23:33:10 2026 +0800
+
+    Lab 9: Sample products with suppliers
+
+commit dc3b49e03f49971852e553fc62a9424e3d7d8a5f
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Nov 20 23:27:07 2026 +0800
+
+    Lab 9: Update git log
+
 commit 14aee288d59d9d7ce01fd8b889c7aa70174eaf57
 Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
 Date:   Fri Nov 20 23:26:30 2026 +0800
