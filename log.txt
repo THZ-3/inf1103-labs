@@ -1,3 +1,99 @@
+commit 14aee288d59d9d7ce01fd8b889c7aa70174eaf57
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Nov 20 23:26:30 2026 +0800
+
+    Lab 9:  Updated
+
+commit d7a49a1c6412e22babfaa75416241e4407b26bc4
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Nov 20 23:19:38 2026 +0800
+
+    Lab 9: Added UML class diagram
+
+commit 8187efe90b87d0ff11fb695634649366cac12b3a
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Nov 20 23:14:21 2026 +0800
+
+    Lab 9: Dockerfile includes tests and products.csv
+
+commit 0180a988b8428dbc9fcfa886992339b1b8c05474
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Nov 20 23:14:18 2026 +0800
+
+    Lab 9: Added error handling tests
+
+commit c2846842bf4f70997d91a3d6bea614141b6b225f
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Nov 20 23:14:16 2026 +0800
+
+    Lab 9: Added validation tests
+
+commit 43650e9c6bee68748a9e20683b04feb357d20b58
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Nov 20 23:14:12 2026 +0800
+
+    Lab 9: Added ProductFactory tests
+
+commit 5594fc47604a3ede04c1a742418d0abf2df1ad55
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Nov 20 23:14:08 2026 +0800
+
+    Lab 9: Added discount strategy tests
+
+commit 465a4b14ce67cc2202b8a08da83887a37603de1c
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Nov 20 23:01:52 2026 +0800
+
+    Lab 9: load_products from CSV and specific exceptions in load_inventory
+
+commit b458115f5801cc52e1af0d6d3ba7b630dcde594c
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Nov 20 23:01:48 2026 +0800
+
+    Lab 9: Menu uses input helpers
+
+commit 0d23527ee5233a394563ed998db69960c769941e
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Nov 20 23:01:46 2026 +0800
+
+    Lab 9: Input helpers that re-ask on invalid input
+
+commit 96d18e9f8315f246e5aa7dce28a53de589eedc28
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Nov 20 22:34:28 2026 +0800
+
+    Lab 9: Validation for price, stock and order quantity
+
+commit 472b93d7f965dd8fea69d8f6a65e9b7142c72802
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Nov 20 22:28:39 2026 +0800
+
+    Lab 9: Create products through ProductFactory
+
+commit 27b8f261eec54144c70fe89c84811e28119887c2
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Nov 20 22:28:22 2026 +0800
+
+    Lab 9: Added ProductFactory
+
+commit 73bce430d6b4aef5a67526050314dabacb174f37
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Nov 20 22:23:42 2026 +0800
+
+    Lab 9: Order uses a DiscountStrategy
+
+commit bd0c39f73fa50872a78ba2a60fc2648ba5abad30
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Nov 20 22:23:34 2026 +0800
+
+    Lab 9: Added discount strategies
+
+commit db2466422770981faedd1b28c71ed9f9ad0c0723
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Nov 13 01:51:59 2026 +0800
+
+    Lab 8: Update git log
+
 commit 2570e6d3eb66e246b01e21e46a256ed3050c45bc
 Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
 Date:   Fri Nov 13 01:47:41 2026 +0800
