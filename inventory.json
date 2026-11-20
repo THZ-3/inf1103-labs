@@ -3,6 +3,11 @@
         "name": "Laptop",
         "price": 2000.0,
         "stock": 50,
+        "supplier": {
+            "supplier_id": "S000",
+            "name": "Unknown Supplier",
+            "contact_email": ""
+        },
         "type": "physical",
         "weight": 0.0
     },
@@ -10,6 +15,11 @@
         "name": "Mouse",
         "price": 30.0,
         "stock": 200,
+        "supplier": {
+            "supplier_id": "S000",
+            "name": "Unknown Supplier",
+            "contact_email": ""
+        },
         "type": "physical",
         "weight": 0.0
     },
@@ -17,6 +27,11 @@
         "name": "Phone",
         "price": 1800.0,
         "stock": 150,
+        "supplier": {
+            "supplier_id": "S000",
+            "name": "Unknown Supplier",
+            "contact_email": ""
+        },
         "type": "physical",
         "weight": 0.0
     },
@@ -24,6 +39,11 @@
         "name": "Photoshop",
         "price": 299.0,
         "stock": 100,
+        "supplier": {
+            "supplier_id": "S000",
+            "name": "Unknown Supplier",
+            "contact_email": ""
+        },
         "type": "digital",
         "download_size": 2048.0
     },
@@ -31,7 +51,108 @@
         "name": "Guitar",
         "price": 350.0,
         "stock": 5,
+        "supplier": {
+            "supplier_id": "S000",
+            "name": "Unknown Supplier",
+            "contact_email": ""
+        },
         "type": "physical",
         "weight": 3.5
+    },
+    "P005": {
+        "name": "Tablet",
+        "price": 1300.0,
+        "stock": 10,
+        "supplier": {
+            "supplier_id": "12345",
+            "name": "Apple",
+            "contact_email": "apple@icloud.com"
+        },
+        "type": "physical",
+        "weight": 1.0
+    },
+    "P020": {
+        "name": "Keyboard",
+        "price": 650.0,
+        "stock": 4,
+        "supplier": {
+            "supplier_id": "S010",
+            "name": "Melody Supply",
+            "contact_email": "orders@melody.com"
+        },
+        "type": "physical",
+        "weight": 9.5
+    },
+    "D020": {
+        "name": "Piano Course",
+        "price": 39.0,
+        "stock": 150,
+        "supplier": {
+            "supplier_id": "S010",
+            "name": "Melody Supply",
+            "contact_email": "orders@melody.com"
+        },
+        "type": "digital",
+        "download_size": 1200.0
+    },
+    "P030": {
+        "name": "Office Chair",
+        "price": 149.0,
+        "stock": 12,
+        "supplier": {
+            "supplier_id": "S020",
+            "name": "Comfort Seating",
+            "contact_email": "orders@comfortseating.com"
+        },
+        "type": "physical",
+        "weight": 15.0
+    },
+    "P031": {
+        "name": "Monitor Stand",
+        "price": 39.5,
+        "stock": 7,
+        "supplier": {
+            "supplier_id": "S020",
+            "name": "Comfort Seating",
+            "contact_email": "orders@comfortseating.com"
+        },
+        "type": "physical",
+        "weight": 3.2
+    },
+    "D030": {
+        "name": "Photo Editor",
+        "price": 49.9,
+        "stock": 100,
+        "supplier": {
+            "supplier_id": "S021",
+            "name": "Pixel Software",
+            "contact_email": "sales@pixelsoftware.com"
+        },
+        "type": "digital",
+        "download_size": 850.0
+    },
+    "D031": {
+        "name": "Antivirus Licence",
+        "price": 29.9,
+        "stock": 250,
+        "supplier": {
+            "supplier_id": "S021",
+            "name": "Pixel Software",
+            "contact_email": "sales@pixelsoftware.com"
+        },
+        "type": "digital",
+        "download_size": 300.0
+    },
+    "P032": {
+        "name": "Desk Lamp",
+        "price": 25.0,
+        "stock": 10,
+        "supplier": {
+            "supplier_id": "S022",
+            "name": "Bright Lights",
+            "contact_email": "hello@brightlights.com"
+        },
+        "type": "physical",
+        "weight": 1.5
     }
 }
