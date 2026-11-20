@@ -1,0 +1,17 @@
+Predict First 1.
+The del supplier only deletes the variable name, not the supplier object. Both products
+store their own reference to the same supplier, so the object stays alive and both products
+can still display it.
+
+Predict First 2.
+The remove_product() only removes Inventory A’s reference to the product from its list. It
+doesn’t destroy the product. The product was created outside the inventory, so the
+inventory doesn’t own its lifecycle.
+
+Predict First 3.
+2 orderline objects and 1 product object will exist. Each order creates its own new
+orderline inside add_order_line(), but both orderlines refer to the same product.
+
+Predict First 4.
+The loop calls the same method on every product, but python runs each object’s own
+subclass version.

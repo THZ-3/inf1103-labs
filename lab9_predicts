@@ -1,0 +1,52 @@
+2.1 The problem
+
+Predict First: 
+(Without Strategy) The Order class’s calculate_total() method must change. I’d have to add another elif discount_type == "student": branch to its if/elif block. Every new discount means editing Order again, which breaks the Open/Closed Principle.
+(With Strategy) No existing class changes. I only add a new class, StudentDiscount, that inherits from DiscountStrategy and implements apply(). The calling code then passes it in with Order("O1", StudentDiscount()) or order.set_discount(StudentDiscount()).
+
+2.3 Use a strategy in Order
+
+Predict First:
+BulkDiscount(200, 20): 250 ≥ 200, so 20 comes off: 230.0
+After set_discount(PercentageDiscount(10)): 10% off the original 250 : 225.0. It doesn’t stack on 230, because calculate_total() always starts again from the order-line subtotal and applies only the current strategy.
+
+2.4 Extend without modifying
+
+Predict First:
+Association. A discount isn’t part of an order.It’s something the order uses to calculate its total. The discount is created outside the Order and passed in, and two orders can share the same PercentageDiscount object. So it’s not composition, because Order doesn’t own it, and not aggregation, because it isn’t a whole made of parts.
+
+3.2 Create a ProductFactory
+
+Predict First:
+"service" matches neither "physical" nor "digital", so the else branch runs and raises ValueError("Unknown product type: service"). If nothing catches it, the program crashes and stops with a traceback, and the code after the call never runs.
+
+3.3 Who knows about what?
+
+Predict First: 
+Before the factory: 2 places. file_handler.py create_product(), which had its own if physical / if digital block, and oop_auditor.py add_product_menu(), which built each class directly.
+After the factory: 1 place for creation, ProductFactory.create(), which needs one new elif. Plus the menu’s PRODUCT_TYPES if users should be able to choose the new type, but that’s a choice for the user interface, not object creation. file_handler.py needs no changes.
+
+4 Add validation
+
+Predict First:
+No. Code written for Product, such as Inventory, relies on the promise that stock is never negative. If DigitalProduct skipped or changed the rule, that code would behave differently depending on which subclass it received. That breaks the Liskov Substitution Principle from Lab 8: a subclass must keep its parent’s expectations.
+
+5.1 User input
+
+Predict First:
+abc: float("abc") raises ValueError, so the except prints Please enter a valid number, e.g. 12.50 and the loop asks again.
+
+-5: it converts to -5.0 but fails the <= 0 check, so it prints Please enter a number greater than zero. and continue asks again.
+
+12.50: valid, so it returns 12.5, and nothing else prints.
+
+5.2 Loading products from a file
+
+Predict First:
+(File present) The header row is skipped.
+Row 4, service: the factory raises ValueError, so it’s skipped and reported.
+Row 5, price abc: float("abc") raises ValueError, so it’s skipped and reported.
+3 products load: P001 Desk Lamp, D001 Photo Editor, P003 Monitor Stand.
+Order: the two skip messages, then 3 products loaded., then Load attempt finished.
+
+(File renamed): open() raises FileNotFoundError, so except runs and prints the not-found message. else doesn’t run, because it only runs when the try succeeds. finally always runs and prints Load attempt finished.
