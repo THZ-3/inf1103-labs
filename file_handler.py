@@ -1,10 +1,9 @@
 import json
 import os
 
-from digital_product import DigitalProduct
 from inventory import Inventory
-from physical_product import PhysicalProduct
 from product import Product
+from product_factory import ProductFactory
 from supplier import Supplier
 
 FILENAME: str = "inventory.json"
@@ -21,16 +20,11 @@ def get_supplier(supplier_data: dict, suppliers: dict[str, Supplier]) -> Supplie
 
 
 def create_product(product_id: str, details: dict, suppliers: dict[str, Supplier]) -> Product:
-    product_type = details.get("type", "physical")
     supplier = get_supplier(details.get("supplier", UNKNOWN_SUPPLIER_DATA), suppliers)
-
-    if product_type == "physical":
-        return PhysicalProduct(product_id, details["name"], details["price"],
-                               details["stock"], supplier, details.get("weight", 0.0))
-    if product_type == "digital":
-        return DigitalProduct(product_id, details["name"], details["price"],
-                              details["stock"], supplier, details["download_size"])
-    raise ValueError(f"Unknown product type: {product_type}")
+    return ProductFactory.create(details.get("type", "physical"), product_id, details["name"],
+                                 details["price"], details["stock"], supplier,
+                                 weight=details.get("weight", 0.0),
+                                 download_size=details.get("download_size", 0.0))
 
 
 def load_inventory(filename: str = FILENAME) -> Inventory:

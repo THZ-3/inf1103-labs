@@ -1,9 +1,10 @@
 from can_be_shipped import CanBeShipped
-from digital_product import DigitalProduct
 from file_handler import load_inventory, save_inventory
 from inventory import Inventory
-from physical_product import PhysicalProduct
+from product_factory import ProductFactory
 from supplier import Supplier
+
+PRODUCT_TYPES: dict[str, str] = {"1": "physical", "2": "digital"}
 
 
 def display_menu() -> None:
@@ -49,10 +50,11 @@ def add_product_menu(inventory: Inventory) -> None:
     print("\nAdd New Product")
     print("1. Physical Product")
     print("2. Digital Product")
-    product_type = input("Product Type: ").strip()
-    if product_type not in ("1", "2"):
+    choice = input("Product Type: ").strip()
+    if choice not in PRODUCT_TYPES:
         print("Error: Invalid product type. Please choose 1 or 2.")
         return
+    product_type = PRODUCT_TYPES[choice]
 
     product_id = input("Product ID: ").strip()
     if not product_id:
@@ -67,13 +69,15 @@ def add_product_menu(inventory: Inventory) -> None:
         print("Error: Product name cannot be empty!")
         return
 
+    weight = 0.0
+    download_size = 0.0
     try:
         price = float(input("Price: "))
         stock = int(input("Stock Quantity: "))
-        if product_type == "1":
-            extra = float(input("Weight (kg): "))
+        if product_type == "physical":
+            weight = float(input("Weight (kg): "))
         else:
-            extra = float(input("Download Size (MB): "))
+            download_size = float(input("Download Size (MB): "))
     except ValueError:
         print("Error: Invalid input. Please enter numbers for price, stock and weight/size.")
         return
@@ -83,10 +87,8 @@ def add_product_menu(inventory: Inventory) -> None:
         return
 
     try:
-        if product_type == "1":
-            product = PhysicalProduct(product_id, product_name, price, stock, supplier, extra)
-        else:
-            product = DigitalProduct(product_id, product_name, price, stock, supplier, extra)
+        product = ProductFactory.create(product_type, product_id, product_name, price, stock,
+                                        supplier, weight=weight, download_size=download_size)
     except ValueError as error:
         print(f"Error: {error}")
         return
