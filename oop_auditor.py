@@ -123,14 +123,7 @@ def search_product_menu(inventory: Inventory) -> None:
     print("-" * 48)
 
 
-def main() -> None:
-    print("=" * 40)
-    print("INVENTORY MANAGEMENT SYSTEM")
-    print("=" * 40)
-
-    inventory = load_inventory()
-    display_menu()
-
+def run_menu(inventory: Inventory) -> None:
     while True:
         option = input("\nEnter option: ").strip()
 
@@ -153,6 +146,22 @@ def main() -> None:
             break
         else:
             print("Error: Invalid option. Please choose a number between 1 and 6.")
+
+
+def main() -> None:
+    print("=" * 40)
+    print("INVENTORY MANAGEMENT SYSTEM")
+    print("=" * 40)
+
+    inventory = load_inventory()
+    display_menu()
+
+    try:
+        run_menu(inventory)
+    except (EOFError, KeyboardInterrupt):
+        print("\n\nInput was closed. Saving inventory before exit...")
+        save_inventory(inventory)
+        print("Program terminated.")
 
 
 if __name__ == "__main__":

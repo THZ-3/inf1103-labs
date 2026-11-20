@@ -8,6 +8,7 @@ from unittest.mock import patch
 
 from file_handler import load_inventory, load_products
 from input_helpers import get_non_empty_text, get_non_negative_int, get_positive_float
+import oop_auditor
 from inventory import Inventory
 from supplier import Supplier
 
@@ -102,6 +103,24 @@ class TestLoadInventory(unittest.TestCase):
             self.assertTrue(os.path.exists(path + ".bak"))
         self.assertEqual(inventory.get_products(), [])
         self.assertIn("is not valid JSON", output)
+
+
+class TestMenuClosedInput(unittest.TestCase):
+    def check_menu_exits_gracefully(self, error: type[BaseException]) -> None:
+        inventory = Inventory()
+        with patch("oop_auditor.load_inventory", return_value=inventory), \
+             patch("oop_auditor.save_inventory") as save, \
+             patch("builtins.input", side_effect=error):
+            _, output = run_quietly(oop_auditor.main)
+        self.assertIn("Input was closed. Saving inventory before exit...", output)
+        self.assertIn("Program terminated.", output)
+        save.assert_called_once_with(inventory)
+
+    def test_end_of_input_exits_gracefully(self) -> None:
+        self.check_menu_exits_gracefully(EOFError)
+
+    def test_ctrl_c_exits_gracefully(self) -> None:
+        self.check_menu_exits_gracefully(KeyboardInterrupt)
 
 
 class TestSpecificExceptions(unittest.TestCase):
