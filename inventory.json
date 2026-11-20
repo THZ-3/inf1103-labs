@@ -154,5 +154,29 @@
         },
         "type": "physical",
         "weight": 1.5
+    },
+    "P041": {
+        "name": "Bookshelf",
+        "price": 89.9,
+        "stock": 9,
+        "supplier": {
+            "supplier_id": "S020",
+            "name": "Comfort Seating",
+            "contact_email": "orders@comfortseating.com"
+        },
+        "type": "physical",
+        "weight": 12.0
+    },
+    "D041": {
+        "name": "Budget Planner App",
+        "price": 14.99,
+        "stock": 500,
+        "supplier": {
+            "supplier_id": "S030",
+            "name": "Smart Apps",
+            "contact_email": "support@smartapps.com"
+        },
+        "type": "digital",
+        "download_size": 120.0
     }
 }
