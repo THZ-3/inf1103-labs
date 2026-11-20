@@ -1,3 +1,4 @@
+import csv
 import json
 import os
 
@@ -27,15 +28,27 @@ def create_product(product_id: str, details: dict, suppliers: dict[str, Supplier
                                  download_size=details.get("download_size", 0.0))
 
 
-def load_inventory(filename: str = FILENAME) -> Inventory:
-    inventory = Inventory()
-
-    if not os.path.exists(filename):
-        print(f"{filename} not found. Initializing with empty inventory.")
-        return inventory
-
+def backup_unreadable_file(filename: str) -> None:
     try:
-        with open(filename, "r") as file:
+        os.replace(filename, filename + ".bak")
+        print(f"The unreadable file was backed up to {filename}.bak.")
+    except OSError:
+        print(f"Warning: could not back up {filename}. Saving will overwrite it.")
+
+
+def load_inventory(filename: str = FILENAME) -> Inventory:
+    try:
+        file = open(filename, "r")
+    except FileNotFoundError:
+        print(f"{filename} not found. Initializing with empty inventory.")
+        return Inventory()
+    except PermissionError:
+        print(f"Error: no permission to read {filename}. Initializing with empty inventory.")
+        return Inventory()
+
+    inventory = Inventory()
+    try:
+        with file:
             data = json.load(file)
         if not isinstance(data, dict):
             raise ValueError(f"{filename} does not contain a dictionary")
@@ -43,18 +56,46 @@ def load_inventory(filename: str = FILENAME) -> Inventory:
         suppliers: dict[str, Supplier] = {}
         for product_id, details in data.items():
             inventory.add_product(create_product(product_id, details, suppliers))
-
+    except json.JSONDecodeError:
+        print(f"Error: {filename} is not valid JSON.")
+    except KeyError as error:
+        print(f"Error: a product in {filename} is missing the field {error}.")
+    except (ValueError, TypeError) as error:
+        print(f"Error: {filename} contains invalid product data ({error}).")
+    else:
         print("\nInventory loaded successfully.")
         return inventory
-    except (json.JSONDecodeError, ValueError, KeyError, TypeError, OSError):
-        print(f"Error reading {filename}. Initializing with empty inventory.")
-        
-        try:
-            os.replace(filename, filename + ".bak")
-            print(f"The unreadable file was backed up to {filename}.bak.")
-        except OSError:
-            print(f"Warning: could not back up {filename}. Saving will overwrite it.")
-        return Inventory()
+
+    print("Initializing with empty inventory.")
+    backup_unreadable_file(filename)
+    return Inventory()
+
+
+def load_products(path: str, inventory: Inventory, supplier: Supplier) -> None:
+    try:
+        file = open(path, newline="")
+    except FileNotFoundError:
+        print(f"Products file not found: {path}")
+    else:
+        loaded = 0
+        with file:
+            reader = csv.reader(file)
+            next(reader, None)
+            for row_number, row in enumerate(reader, start=2):
+                try:
+                    product_type, product_id, name, price, stock_quantity = row
+                    product = ProductFactory.create(product_type, product_id, name,
+                                                    float(price), int(stock_quantity), supplier)
+                except ValueError as error:
+                    print(f"Skipping row {row_number}: {error}")
+                    continue
+                if inventory.add_product(product):
+                    loaded += 1
+                else:
+                    print(f"Skipping row {row_number}: product ID {product_id} already exists")
+        print(f"{loaded} products loaded.")
+    finally:
+        print("Load attempt finished.")
 
 
 def save_inventory(inventory: Inventory, filename: str = FILENAME) -> None:
