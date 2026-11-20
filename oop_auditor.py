@@ -1,5 +1,7 @@
 from can_be_shipped import CanBeShipped
 from file_handler import load_inventory, save_inventory
+from input_helpers import (get_choice, get_non_empty_text, get_non_negative_float,
+                           get_non_negative_int, get_positive_float)
 from inventory import Inventory
 from product_factory import ProductFactory
 from supplier import Supplier
@@ -26,10 +28,7 @@ def find_supplier(inventory: Inventory, supplier_id: str) -> Supplier | None:
 
 
 def choose_supplier(inventory: Inventory) -> Supplier | None:
-    supplier_id = input("Supplier ID: ").strip()
-    if not supplier_id:
-        print("Error: Supplier ID cannot be empty!")
-        return None
+    supplier_id = get_non_empty_text("Supplier ID: ")
 
     supplier = find_supplier(inventory, supplier_id)
     if supplier is not None:
@@ -37,7 +36,7 @@ def choose_supplier(inventory: Inventory) -> Supplier | None:
         return supplier
 
     print("New supplier.")
-    supplier_name = input("Supplier Name: ").strip()
+    supplier_name = get_non_empty_text("Supplier Name: ")
     contact_email = input("Supplier Email: ").strip()
     try:
         return Supplier(supplier_id, supplier_name, contact_email)
@@ -50,37 +49,24 @@ def add_product_menu(inventory: Inventory) -> None:
     print("\nAdd New Product")
     print("1. Physical Product")
     print("2. Digital Product")
-    choice = input("Product Type: ").strip()
-    if choice not in PRODUCT_TYPES:
-        print("Error: Invalid product type. Please choose 1 or 2.")
-        return
-    product_type = PRODUCT_TYPES[choice]
+    product_type = get_choice("Product Type: ", PRODUCT_TYPES)
 
-    product_id = input("Product ID: ").strip()
-    if not product_id:
-        print("Error: Product ID cannot be empty!")
-        return
-    if inventory.find_product(product_id) is not None:
-        print("Error: Product ID already exists!")
-        return
+    while True:
+        product_id = get_non_empty_text("Product ID: ")
+        if inventory.find_product(product_id) is None:
+            break
+        print("That Product ID already exists. Please enter a different one.")
 
-    product_name = input("Product Name: ").strip()
-    if not product_name:
-        print("Error: Product name cannot be empty!")
-        return
+    product_name = get_non_empty_text("Product Name: ")
+    price = get_positive_float("Price: ")
+    stock = get_non_negative_int("Stock Quantity: ")
 
     weight = 0.0
     download_size = 0.0
-    try:
-        price = float(input("Price: "))
-        stock = int(input("Stock Quantity: "))
-        if product_type == "physical":
-            weight = float(input("Weight (kg): "))
-        else:
-            download_size = float(input("Download Size (MB): "))
-    except ValueError:
-        print("Error: Invalid input. Please enter numbers for price, stock and weight/size.")
-        return
+    if product_type == "physical":
+        weight = get_non_negative_float("Weight (kg): ")
+    else:
+        download_size = get_non_negative_float("Download Size (MB): ")
 
     supplier = choose_supplier(inventory)
     if supplier is None:
@@ -110,11 +96,7 @@ def update_stock_menu(inventory: Inventory) -> None:
     print(f"Name: {product.get_name()}")
     print(f"Current Stock: {product.get_stock()}")
 
-    try:
-        new_stock = int(input("\nNew Stock Quantity: "))
-    except ValueError:
-        print("Error: Invalid input. Please enter an integer.")
-        return
+    new_stock = get_non_negative_int("\nNew Stock Quantity: ")
 
     if inventory.update_stock(product_id, new_stock):
         print("\nStock updated successfully!")
