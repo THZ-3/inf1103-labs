@@ -10,8 +10,8 @@ class Product(ABC):
             raise ValueError("Product ID cannot be empty.")
         if not name:
             raise ValueError("Product name cannot be empty.")
-        if price < 0:
-            raise ValueError("Price cannot be negative.")
+        if price <= 0:
+            raise ValueError("Price must be greater than zero.")
         if stock < 0:
             raise ValueError("Stock quantity cannot be negative.")
 
