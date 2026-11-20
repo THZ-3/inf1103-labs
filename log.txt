@@ -1,3 +1,21 @@
+commit 7c42c3356f406d9e64f1a22ca5ec70eecb8d3ed1
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Nov 20 23:52:46 2026 +0800
+
+    Added screenshots for Labs 4 to 9
+
+commit ed92511c3ba9512090dada6e48c782291075123d
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Nov 20 23:48:15 2026 +0800
+
+    Lab 9: Products added during testing
+
+commit a1e2018266accad6497787566039ff871f90197f
+Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
+Date:   Fri Nov 20 23:37:32 2026 +0800
+
+    Lab 9: Update git log
+
 commit 7c6df1d6540176bf4661dae991059038741bbb6b
 Author: Thu Htet Zin <2604718@sit.singaporetech.edu.sg>
 Date:   Fri Nov 20 23:37:23 2026 +0800
